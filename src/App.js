@@ -6,6 +6,7 @@ import data from './data';
 import Navigation from './components/Navigation';
 import Products from './components/Products';
 import ShoppingCart from './components/ShoppingCart';
+import ShoppingCartItem from './components/ShoppingCartItem'
 import {ProductContext} from './contexts/ProductContext';
 import {CartContext} from './contexts/CartContext';
 
@@ -16,6 +17,10 @@ function App() {
 	const addItem = item => {
 		setCart([...cart, item]);
 	};
+
+	const removeItem = item => {
+		setCart([cart, item])
+	}
 
 	return (
 		<ProductContext.Provider value={{products, addItem}}>
@@ -34,6 +39,7 @@ function App() {
 					path="/cart"
 					component={ShoppingCart}
 				/>
+
 			</div>
 		</CartContext.Provider>
 		</ProductContext.Provider>
