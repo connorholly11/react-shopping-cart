@@ -6,7 +6,6 @@ import data from './data';
 import Navigation from './components/Navigation';
 import Products from './components/Products';
 import ShoppingCart from './components/ShoppingCart';
-import ShoppingCartItem from './components/ShoppingCartItem'
 import {ProductContext} from './contexts/ProductContext';
 import {CartContext} from './contexts/CartContext';
 
@@ -19,13 +18,14 @@ function App() {
 	};
 
 	const removeItem = item => {
-		setCart([cart, item])
+		setCart([...cart, item])
 	}
 
 	return (
 		<ProductContext.Provider value={{products, addItem}}>
-		<CartContext.Provider value={cart, setCart}>
+		
 			<div className="App">
+			<CartContext.Provider value={{cart, removeItem}}>
 				<Navigation cart={cart} />
 
 				{/* Routes */}
@@ -39,9 +39,9 @@ function App() {
 					path="/cart"
 					component={ShoppingCart}
 				/>
-
+			</CartContext.Provider>
 			</div>
-		</CartContext.Provider>
+		
 		</ProductContext.Provider>
 	);
 }
